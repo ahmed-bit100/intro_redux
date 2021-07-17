@@ -1,4 +1,12 @@
-import {COMPLETE, DECREMENT, DELETE, INCREMENT} from './actionTypes';
+import {
+  ADD,
+  COMPLETE,
+  DECREMENT,
+  DELETE,
+  EDIT,
+  FILTER,
+  INCREMENT,
+} from './actionTypes';
 
 // this is our initial data
 const initialState = {
@@ -8,6 +16,7 @@ const initialState = {
     {id: Math.random(), action: 'have coffee', isDone: true},
     {id: Math.random(), action: 'go out', isDone: false},
   ],
+  filter: false,
 };
 
 // reducer is a function that takes in state and the action object as
@@ -36,6 +45,21 @@ const reducer = (state = initialState, {type, payload}) => {
         tasks: state.tasks.map((el) =>
           el.id === payload ? {...el, isDone: !el.isDone} : el
         ),
+      };
+    case ADD:
+      return {
+        ...state,
+        tasks: [...state.tasks, payload],
+      };
+    case EDIT:
+      return {
+        ...state,
+        tasks: state.tasks.map((el) => (el.id === payload.id ? payload : el)),
+      };
+    case FILTER:
+      return {
+        ...state,
+        filter: !state.filter,
       };
     default:
       return state; // default case always returns the state

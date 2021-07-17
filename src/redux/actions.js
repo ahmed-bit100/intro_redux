@@ -1,4 +1,12 @@
-import {COMPLETE, DECREMENT, DELETE, INCREMENT} from './actionTypes';
+import {
+  ADD,
+  COMPLETE,
+  DECREMENT,
+  DELETE,
+  EDIT,
+  FILTER,
+  INCREMENT,
+} from './actionTypes';
 
 // these functions are called action creators, they return the action
 // objects
@@ -27,5 +35,25 @@ export const completeTask = (id) => {
   return {
     type: COMPLETE,
     payload: id,
+  };
+};
+
+export const addTask = (newTask) => {
+  return {
+    type: ADD,
+    payload: newTask,
+  };
+};
+
+export const editTask = (editedTask) => {
+  return {
+    type: EDIT,
+    payload: editedTask,
+  };
+};
+
+export const filterTask = () => {
+  return {
+    type: FILTER,
   };
 };
